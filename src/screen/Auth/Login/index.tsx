@@ -19,6 +19,7 @@ interface IInputValue {
 }
 
 const LoginPage = () => {
+  const [isPassHiden, setIsPassHiden] = useState(true);
   const [inputValues, setInputValues] = useState<IInputValue>({
     email: '',
     password: '',
@@ -27,7 +28,7 @@ const LoginPage = () => {
   });
   const handleChangeInput = (
     key: 'email' | 'password' | 'errorEmail' | 'errorPassword',
-    value: string,
+    value: null | string,
   ) => {
     setInputValues(prevState => ({...prevState, [key]: value}));
   };
@@ -51,6 +52,12 @@ const LoginPage = () => {
       handleChangeInput('errorPassword', null);
     }
   };
+  const isDisabledLoginBtn = Boolean(
+    inputValues.errorEmail ||
+      inputValues.errorPassword ||
+      !inputValues.email ||
+      !inputValues.password,
+  );
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.mainWrapper}>
@@ -96,14 +103,30 @@ const LoginPage = () => {
                   handleChangeInput('password', text);
                   checkPassword(text);
                 }}
-                secureTextEntry={true}
+                secureTextEntry={isPassHiden}
+              />
+              <TouchableOpacity
+                onPress={() => {
+                  setIsPassHiden(!isPassHiden);
+                }}
+                hitSlop={{top: 15, bottom: 15, right: 15, left: 15}}
+                style={
+                  isPassHiden
+                    ? styles.disablePasswordBtn
+                    : styles.activePasswordbtn
+                }
               />
             </View>
             {inputValues.errorPassword && (
               <Text>{inputValues.errorPassword}</Text>
             )}
           </View>
-          <TouchableOpacity style={styles.loginBtnContainer}>
+          <TouchableOpacity
+            style={[
+              styles.loginBtnContainer,
+              isDisabledLoginBtn && {opacity: 0.5},
+            ]}
+            disabled={isDisabledLoginBtn}>
             <Text style={styles.loginText}>Увійти</Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
