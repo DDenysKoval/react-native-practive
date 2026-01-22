@@ -10,6 +10,7 @@ import {
   View,
 } from 'react-native';
 import styles from '../styles';
+import {HidePassIcon, ViewPassIcon} from '../../../assets/icons';
 
 interface IInputValue {
   email: string;
@@ -109,13 +110,13 @@ const LoginPage = () => {
                 onPress={() => {
                   setIsPassHiden(!isPassHiden);
                 }}
-                hitSlop={{top: 15, bottom: 15, right: 15, left: 15}}
-                style={
-                  isPassHiden
-                    ? styles.disablePasswordBtn
-                    : styles.activePasswordbtn
-                }
-              />
+                hitSlop={{top: 15, bottom: 15, right: 15, left: 15}}>
+                {isPassHiden ? (
+                  <ViewPassIcon fill={'#000000'} />
+                ) : (
+                  <HidePassIcon fill={'#a36161'} />
+                )}
+              </TouchableOpacity>
             </View>
             {inputValues.errorPassword && (
               <Text>{inputValues.errorPassword}</Text>
