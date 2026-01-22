@@ -1,17 +1,24 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import styles from '../styles';
 import AuthHeader from '../components/AuthHeader/AuthHeader';
 import AuthLayout from '../components/AuthLayout/AuthLayout';
 import Input from '../../../common/components/Input';
 import DefaultButton from '../../../common/components/DefaultButton';
-import {Formik, FormikValues} from 'formik';
+import {Formik, FormikHelpers, FormikValues} from 'formik';
 import {RegistrationSchema} from '../utils/validation';
+import auth from '@react-native-firebase/auth';
 
 interface ITouched {
   email: boolean;
   password: boolean;
   confirmPassword: boolean;
+}
+
+interface IFormValues {
+  email: string;
+  password: string;
+  confirmPassword: string;
 }
 
 const RegisterPage = () => {
@@ -21,14 +28,35 @@ const RegisterPage = () => {
     confirmPassword: false,
   });
 
+  const registerUser = async (
+    email: string,
+    password: string,
+    formikHelpers: FormikHelpers<IFormValues>,
+  ) => {
+    try {
+      await auth().createUserWithEmailAndPassword(email, password);
+    } catch (error: any) {
+      if (error.code === 'auth/email-already-in-use') {
+        formikHelpers.setErrors({email: 'Email already in use'});
+      }
+    }
+  };
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(user => {
+      console.log('user', user);
+    });
+
+    return subscriber;
+  }, []);
+
   return (
     <AuthLayout>
       <AuthHeader activeTab="registration" />
       <Formik
         initialValues={{email: '', password: '', confirmPassword: ''}}
         validationSchema={RegistrationSchema()}
-        onSubmit={value => {
-          console.log('value', value);
+        onSubmit={(value, formikHelpers) => {
+          registerUser(value.email, value.password, formikHelpers);
         }}>
         {({
           values,
