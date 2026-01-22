@@ -25,7 +25,7 @@ export default StyleSheet.create({
     borderRadius: 20,
     marginTop: 32,
   },
-  loginBtn: {
+  activeTab: {
     alignItems: 'center',
     backgroundColor: '#F8F8F9',
     padding: 10,
@@ -35,8 +35,9 @@ export default StyleSheet.create({
   authText: {
     color: '#0B0B0B',
     fontSize: 14,
+    fontFamily: fonts.MontserratRegular,
   },
-  registrationBtn: {
+  disabledTab: {
     alignItems: 'center',
     padding: 10,
     borderRadius: 20,
@@ -76,6 +77,8 @@ export default StyleSheet.create({
   },
   input: {
     padding: 0,
+    flex: 1,
+    fontFamily: fonts.MontserratRegular,
   },
   loginBtnContainer: {
     borderRadius: 25,

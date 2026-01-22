@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {DevSettings, NativeModules, SafeAreaView} from 'react-native';
-import LoginPage from './src/screen/Auth/Login/index';
+import RootNavigation from './src/navigation';
 
 function App(): React.JSX.Element {
   useEffect(() => {
@@ -12,12 +12,10 @@ function App(): React.JSX.Element {
         NativeModules.DevSettings.setIsDebuggingRemotely(false);
       });
     }
-    console.log('info', {age: 25, array: [1, 2, 3, 4, 5, {name: 'den'}]});
-    fetch('https://google.com');
   }, []);
   return (
     <SafeAreaView style={{flex: 1}}>
-      <LoginPage />
+      <RootNavigation />
     </SafeAreaView>
   );
 }
