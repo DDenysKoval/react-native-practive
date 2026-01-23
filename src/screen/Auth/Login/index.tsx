@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import styles from '../styles';
 import AuthHeader from '../components/AuthHeader/AuthHeader';
@@ -6,6 +6,10 @@ import AuthLayout from '../components/AuthLayout/AuthLayout';
 import Input from '../../../common/components/Input';
 import DefaultButton from '../../../common/components/DefaultButton';
 import auth from '@react-native-firebase/auth';
+import {CommonActions, useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackNavigation} from '../../../navigation/types';
+import {ScreenNames} from '../../../constants/screenNames';
 
 interface IInputValue {
   email: string;
@@ -21,6 +25,9 @@ const LoginPage = () => {
     errorEmail: null,
     errorPassword: null,
   });
+
+  const navigation = useNavigation<StackNavigationProp<RootStackNavigation>>();
+
   const handleChangeInput = (
     key: 'email' | 'password' | 'errorEmail' | 'errorPassword',
     value: null | string,
@@ -60,6 +67,23 @@ const LoginPage = () => {
       !inputValues.email ||
       !inputValues.password,
   );
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(user => {
+      console.log('user', user);
+      if (user) {
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 1,
+            routes: [{name: ScreenNames.LOGGED_IN_STACK}],
+          }),
+        );
+      }
+    });
+
+    return subscriber;
+  }, []);
+
   return (
     <AuthLayout>
       <AuthHeader activeTab="login" />
