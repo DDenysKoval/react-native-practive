@@ -1,18 +1,41 @@
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import React from 'react';
-import {Text, TouchableOpacity} from 'react-native';
-import {RootStackNavigation} from '../../navigation/types';
+import React, {useEffect, useState} from 'react';
+import firestore from '@react-native-firebase/firestore';
+import PetsList from './components/PetsList';
+import {View} from 'react-native';
+
+export interface Animal {
+  age: number;
+  color: string;
+  description: string;
+  images: string[];
+  isDog: boolean;
+  isVaccinated: boolean;
+  location: string;
+  name: string;
+  sex: string;
+  size: string;
+  timeStamp: number;
+  type: string;
+}
 
 export default function Home() {
-  const navigation = useNavigation<StackNavigationProp<RootStackNavigation>>();
+  const [pets, setPets] = useState<Animal[]>([]);
+  const getPets = async () => {
+    try {
+      const result = await firestore().collection('animals').get();
+      const temp: Animal[] = result.docs.map(e => e.data()) as Animal[];
+      setPets(temp);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    getPets();
+  }, []);
 
   return (
-    <TouchableOpacity
-      onPress={() => {
-        navigation.goBack();
-      }}>
-      <Text>Hello</Text>
-    </TouchableOpacity>
+    <View>
+      <PetsList pets={pets} />
+    </View>
   );
 }

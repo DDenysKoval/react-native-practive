@@ -1,11 +1,11 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import Header from '../Header';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native';
 import {fonts} from '../../../constants/fonts';
 import {ArrowIcon} from '../../../assets/icons';
 
-export default function Drawercontent() {
+export default function DrawerContent() {
   return (
     <View>
       <Header isOpenDrawer={true} />
