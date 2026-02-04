@@ -1,12 +1,20 @@
+import {ISettings} from '../../screen/FilterSettings';
+import {Animal} from '../../screen/Home';
+
 export type LoggedOutStackType = {
   LOGIN_PAGE: undefined;
   REGISTRATION_PAGE: undefined;
 };
 export type LoggedInStackType = {
   DRAWER_STACK: undefined;
+  FILTERS_SETTINGS_PAGE: {
+    petsList: Animal[];
+  };
 };
 export type TabBarStackType = {
-  HOME_PAGE: undefined;
+  HOME_PAGE: {
+    settings: ISettings;
+  };
   FAVORITE_PAGE: undefined;
 };
 export type DrawerStackType = {

@@ -4,7 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {ScreenNames} from '../constants/screenNames';
 import {RootStackNavigation} from './types';
 import LoggedInStack from './LoggedInStack';
-import LoggedOutStack from './LoggedOutstack';
+import LoggedOutStack from './LoggedOutStack';
 
 const Stack = createNativeStackNavigator<RootStackNavigation>();
 
