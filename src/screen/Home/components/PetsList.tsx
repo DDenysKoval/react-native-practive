@@ -11,19 +11,29 @@ import {
 import {Animal} from '../index';
 import {fonts} from '../../../constants/fonts';
 import FavoriteIcon from '../../../assets/icons/FavoriteIcon';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {LoggedInStackType} from '../../../navigation/types';
+import {ScreenNames} from '../../../constants/screenNames';
 
 interface PetsListProps {
   pets: Animal[];
 }
 
 export default function PetsList({pets}: PetsListProps) {
+  const navigation = useNavigation<StackNavigationProp<LoggedInStackType>>();
+  const handleGoToPet = (item: Animal) => {
+    navigation.navigate(ScreenNames.PET_PAGE, {pet: item});
+  };
   return (
     <FlatList
       data={pets}
       numColumns={2}
       renderItem={({item}) => {
         return (
-          <TouchableOpacity style={styles.item}>
+          <TouchableOpacity
+            style={styles.item}
+            onPress={() => handleGoToPet(item)}>
             <ImageBackground
               source={{uri: item.images[0]}}
               imageStyle={{borderRadius: 20}}

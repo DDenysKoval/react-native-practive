@@ -10,6 +10,8 @@ import SearchIcon from './SearchIcon';
 import MaleIcon from './MaleIcon';
 import FemaleIcon from './FemaleIcon';
 import MaleAndFemaleIcon from './MaleAndFemaleIcon';
+import PlaceIcon from './PlaceIcon';
+import LongArrowIcon from './LongArrowIcon';
 
 export {
   ViewPassIcon,
@@ -24,4 +26,6 @@ export {
   MaleAndFemaleIcon,
   SettingsIcon,
   SearchIcon,
+  PlaceIcon,
+  LongArrowIcon,
 };

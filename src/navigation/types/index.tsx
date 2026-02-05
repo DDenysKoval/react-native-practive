@@ -7,6 +7,7 @@ export type LoggedOutStackType = {
 };
 export type LoggedInStackType = {
   DRAWER_STACK: undefined;
+  PET_PAGE: {pet: Animal};
   FILTERS_SETTINGS_PAGE: {
     petsList: Animal[];
   };

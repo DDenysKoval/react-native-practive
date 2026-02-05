@@ -16,6 +16,7 @@ export default function SwitchBtn({items, active, handleSwitch}: IItems) {
     <View style={styles.switcherWrapper}>
       {items.map((e, index) => (
         <TouchableOpacity
+          key={index}
           onPress={() => handleSwitch(e)}
           style={
             active === e.id || (active === null && index === 0)
