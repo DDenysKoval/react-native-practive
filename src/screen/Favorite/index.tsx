@@ -1,6 +1,32 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
+import PetsList from '../Home/components/PetsList';
+import {useCallback, useState} from 'react';
+import {Animal} from '../Home';
+import {useFocusEffect} from '@react-navigation/core';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function Favorite() {
-  return <Text>Favorite</Text>;
-}
+export default () => {
+  const [pets, setPets] = useState<Animal[]>([]);
+  const getFavorite = async () => {
+    try {
+      const favorites = await AsyncStorage.getItem('favorites');
+      if (favorites) {
+        const result = JSON.parse(favorites);
+        setPets(result);
+      }
+    } catch (e) {
+      console.log('e', e);
+    }
+  };
+  useFocusEffect(
+    useCallback(() => {
+      getFavorite();
+    }, []),
+  );
+  return (
+    <View style={{flex: 1}}>
+      {pets.length ? <PetsList pets={pets} /> : <ActivityIndicator />}
+    </View>
+  );
+};
