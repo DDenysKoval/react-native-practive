@@ -13,7 +13,10 @@ import MaleAndFemaleIcon from './MaleAndFemaleIcon';
 import PlaceIcon from './PlaceIcon';
 import LongArrowIcon from './LongArrowIcon';
 
+const DogImage = require('../icons/png/dogIcon.png');
+
 export {
+  DogImage,
   ViewPassIcon,
   HidePassIcon,
   PawIcon,
