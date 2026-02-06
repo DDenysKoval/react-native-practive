@@ -61,7 +61,6 @@ export default function PetsList({pets}: PetsListProps) {
   useFocusEffect(
     useCallback(() => {
       getFavorite();
-      // AsyncStorage.clear();
     }, []),
   );
 
