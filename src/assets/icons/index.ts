@@ -12,6 +12,10 @@ import FemaleIcon from './FemaleIcon';
 import MaleAndFemaleIcon from './MaleAndFemaleIcon';
 import PlaceIcon from './PlaceIcon';
 import LongArrowIcon from './LongArrowIcon';
+import CheckIcon from './CheckIcon';
+import ENIcon from './ENIcon';
+import PLIcon from './PLIcon';
+import UKRIcon from './UKRIcon';
 
 const DogImage = require('../icons/png/dogIcon.png');
 
@@ -31,4 +35,8 @@ export {
   SearchIcon,
   PlaceIcon,
   LongArrowIcon,
+  CheckIcon,
+  ENIcon,
+  PLIcon,
+  UKRIcon,
 };

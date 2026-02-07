@@ -1,16 +1,17 @@
 import React from 'react';
 import {BottomTabNavigationOptions} from '@react-navigation/bottom-tabs';
 import {Text, View} from 'react-native';
-import {HeartIcon, Label, PawIcon} from '../../assets/icons';
+import {HeartIcon, PawIcon} from '../../assets/icons';
 import {ScreenNames} from '../../constants/screenNames';
 import styles from './styles';
+import i18n from '../../../i18.config';
 
 const getName = (name: string) => {
   switch (name) {
     case ScreenNames.FAVORITE_PAGE:
-      return 'Улюбленці';
+      return i18n.t('favorite');
     case ScreenNames.HOME_PAGE:
-      return 'Пухнастики';
+      return i18n.t('fluffies');
   }
 };
 

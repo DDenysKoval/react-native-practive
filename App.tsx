@@ -2,6 +2,8 @@ import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
 import {DevSettings, NativeModules, SafeAreaView} from 'react-native';
 import RootNavigation from './src/navigation';
+import SplashScreen from 'react-native-splash-screen';
+import './i18.config';
 // import {firebase} from '@react-native-firebase/firestore';
 // import {animals} from './animals_list';
 
@@ -32,6 +34,7 @@ function App(): React.JSX.Element {
       });
     }
     // uploadAnimalsToFirestore(animals);
+    SplashScreen.hide();
   }, []);
   return (
     <SafeAreaView style={{flex: 1}}>

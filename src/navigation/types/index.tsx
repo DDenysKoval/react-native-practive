@@ -11,6 +11,7 @@ export type LoggedInStackType = {
   FILTERS_SETTINGS_PAGE: {
     petsList: Animal[];
   };
+  LANGUAGES_PAGE: undefined;
 };
 export type TabBarStackType = {
   HOME_PAGE: {

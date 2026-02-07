@@ -6,6 +6,7 @@ import DrawerStack from '../DrawerStack';
 import FilterSettings from '../../screen/FilterSettings';
 import SettingsHeader from '../../common/components/SettingsHeader';
 import PetPage from '../../screen/PetPage';
+import Languages from '../../screen/Languages';
 
 const Stack = createNativeStackNavigator<LoggedInStackType>();
 
@@ -26,6 +27,13 @@ export default function LoggedInStack() {
       <Stack.Screen
         name={ScreenNames.PET_PAGE}
         component={PetPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name={ScreenNames.LANGUAGES_PAGE}
+        component={Languages}
         options={{
           headerShown: false,
         }}
